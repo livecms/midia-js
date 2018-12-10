@@ -340,12 +340,16 @@
                 return false;
             });
 
-            $('.midia-wrapper').scroll(function () {
-                midia._loadFilesWhenOnScreen();
+            $(myid).scroll(function () {
+                if ($(this).css('display') != 'none') {
+                    midia._loadFilesWhenOnScreen();
+                }
             });
 
             $(window).on('resize scroll', function() {
-                midia._loadFilesWhenOnScreen();
+                if ($(myid).css('display') != 'none') {
+                    midia._loadFilesWhenOnScreen();
+                }
             });
 
             $(document).on("click", myid + " #midia-loadmore", function() {
@@ -501,7 +505,7 @@
                     'X-CSRF-TOKEN': options.csrf_field
                 },
                 beforeSend: function() {
-                    $(myid + " .midia-files").append('<div class="midia-loading"><img src="'+options.base_url+'/vendor/midia/spinner.svg"><div>Please wait</div></div>');
+                    $(myid + " .midia-files").append('<div class="midia-loading"><img src="/vendor/midia/spinner.svg"><div>Please wait</div></div>');
                     $(myid + " #midia-loadmore").hide();
                     if(key) {
                         $(myid + " #midia-search").attr('disabled', true);
